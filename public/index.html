@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>MiniMarket - Sistema</title>
+
+<link rel="icon" href="favicon.ico">
+
+<link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+```
+<!-- ==========================================
+     ENCABEZADO
+=========================================== -->
+
+<header class="header">
+
+    <div>
+        <h1>MiniMarket</h1>
+        <p>Sistema de inventario y ventas</p>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- ==========================================
+         RESUMEN
+    =========================================== -->
+
+    <section class="resumen">
+
+        <div class="card">
+            <span>Productos</span>
+            <strong id="totalProductos">0</strong>
+        </div>
+
+        <div class="card">
+            <span>Unidades</span>
+            <strong id="totalUnidades">0</strong>
+        </div>
+
+        <div class="card">
+            <span>Stock bajo</span>
+            <strong id="stockBajo">0</strong>
+        </div>
+
+        <div class="card">
+            <span>Valor inventario</span>
+            <strong id="valorInventario">$0</strong>
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         AGREGAR / EDITAR PRODUCTO
+    =========================================== -->
+
+    <section class="formulario-section">
+
+        <h2>Agregar producto</h2>
+
+        <form id="formProducto">
+
+            <div class="grupo">
+
+                <label for="codigo">
+                    Código
+                </label>
+
+                <input
+                    type="text"
+                    id="codigo"
+                    required
+                >
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="nombre">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    required
+                >
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="categoria">
+                    Categoría
+                </label>
+
+                <select id="categoria" required>
+
+                    <option value="">
+                        Seleccionar categoría
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="precioCompra">
+                    Precio de compra
+                </label>
+
+                <input
+                    type="number"
+                    id="precioCompra"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="precioVenta">
+                    Precio de venta
+                </label>
+
+                <input
+                    type="number"
+                    id="precioVenta"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="stock">
+                    Stock
+                </label>
+
+                <input
+                    type="number"
+                    id="stock"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="stockMinimo">
+                    Stock mínimo
+                </label>
+
+                <input
+                    type="number"
+                    id="stockMinimo"
+                    min="0"
+                    required
+                >
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="proveedor">
+                    Proveedor
+                </label>
+
+                <select id="proveedor" required>
+
+                    <option value="">
+                        Seleccionar proveedor
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-agregar"
+            >
+                Guardar producto
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         REGISTRAR VENTA
+    =========================================== -->
+
+    <section class="formulario-section">
+
+        <h2>Registrar venta</h2>
+
+
+        <form id="formVenta">
+
+            <div class="grupo">
+
+                <label for="clienteVenta">
+                    Cliente
+                </label>
+
+                <select
+                    id="clienteVenta"
+                    required
+                >
+
+                    <option value="">
+                        Seleccionar cliente
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="productoVenta">
+                    Producto
+                </label>
+
+                <select id="productoVenta">
+
+                    <option value="">
+                        Seleccionar producto
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="cantidadVenta">
+                    Cantidad
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidadVenta"
+                    min="1"
+                    value="1"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                id="btnAgregarVenta"
+                class="btn-agregar"
+            >
+                Agregar a la venta
+            </button>
+
+        </form>
+
+
+        <!-- DETALLE DE LA VENTA -->
+
+        <div class="tabla-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaVenta">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="total-venta">
+
+            <h3>
+
+                Total:
+
+                <span id="totalVenta">
+                    $0
+                </span>
+
+            </h3>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="btnRegistrarVenta"
+            class="btn-agregar"
+        >
+            Registrar venta
+        </button>
+
+    </section>
+    <!-- ==========================================
+     GESTIÓN DE CLIENTES
+=========================================== -->
+
+<section class="formulario-section">
+
+    <h2>Gestión de clientes</h2>
+
+    <form id="formCliente">
+
+        <div class="grupo">
+
+            <label for="nombreCliente">
+                Nombre
+            </label>
+
+            <input
+                type="text"
+                id="nombreCliente"
+                required
+            >
+
+        </div>
+
+
+        <div class="grupo">
+
+            <label for="telefonoCliente">
+                Teléfono
+            </label>
+
+            <input
+                type="text"
+                id="telefonoCliente"
+            >
+
+        </div>
+
+
+        <div class="grupo">
+
+            <label for="correoCliente">
+                Correo
+            </label>
+
+            <input
+                type="email"
+                id="correoCliente"
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn-agregar"
+        >
+            Guardar cliente
+        </button>
+
+    </form>
+
+
+    <div class="tabla-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tablaClientes">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+<!-- ==========================================
+     GESTIÓN DE CATEGORÍAS
+=========================================== -->
+
+<section class="formulario-section">
+
+    <h2>Gestión de categorías</h2>
+
+    <form id="formCategoria">
+
+        <div class="grupo">
+
+            <label for="nombreCategoria">
+                Nombre
+            </label>
+
+            <input
+                type="text"
+                id="nombreCategoria"
+                required
+            >
+
+        </div>
+
+        <div class="grupo">
+
+            <label for="descripcionCategoria">
+                Descripción
+            </label>
+
+            <input
+                type="text"
+                id="descripcionCategoria"
+            >
+
+        </div>
+
+        <button
+            type="submit"
+            class="btn-agregar"
+        >
+            Guardar categoría
+        </button>
+
+    </form>
+
+
+    <div class="tabla-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaCategorias">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+    <!-- ==========================================
+         INVENTARIO
+    =========================================== -->
+
+    <section class="inventario-section">
+
+        <div class="titulo-inventario">
+
+            <h2>Inventario</h2>
+
+            <input
+                type="text"
+                id="buscar"
+                placeholder="Buscar producto..."
+            >
+
+        </div>
+
+
+        <div class="tabla-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Compra</th>
+                        <th>Venta</th>
+                        <th>Stock</th>
+                        <th>Mínimo</th>
+                        <th>Proveedor</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaProductos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         HISTORIAL DE VENTAS
+    =========================================== -->
+
+    <section class="inventario-section">
+
+        <div class="titulo-inventario">
+
+            <h2>Historial de ventas</h2>
+
+        </div>
+
+
+        <div class="tabla-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>N° Venta</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Acción</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaVentas"></tbody>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         DETALLE DE VENTA
+    =========================================== -->
+
+    <section
+        class="inventario-section"
+        id="detalleVentaSection"
+        style="display: none;"
+    >
+
+        <div class="titulo-inventario">
+
+            <h2 id="tituloDetalleVenta">
+                Detalle de venta
+            </h2>
+
+        </div>
+
+
+        <div id="informacionVenta"></div>
+
+
+        <div class="tabla-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaDetalleVenta">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script src="script.js"></script>
+```
+
+</body>
+
+</html>
